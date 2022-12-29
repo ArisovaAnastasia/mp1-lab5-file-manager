@@ -67,7 +67,7 @@ void printt(int y, data arr[], int u) {
 int main() {
 	char num; data files[1000];int war;int sort = 0;int y = 0;int h = 0;
 	do {
-		printf("1-kselect sorting\n");printf("2-specify the path to the directory\n");
+		printf("1-select sorting\n");printf("2-specify the path to the directory\n");
 		printf("select an action\n");
 		scanf_s("%c", &num);
 		switch (num) {
