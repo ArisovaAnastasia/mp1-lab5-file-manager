@@ -7,7 +7,8 @@
 #include <strsafe.h>
 struct data {
 	WCHAR name[100];
-	int bytes;};
+	int bytes;
+};
 
 void bubblesort(data files[], int y) {
 	data buf;
@@ -45,9 +46,9 @@ void quicksort(int l, data arr[], int r) {
 		quicksort(l, arr, j);
 	if (i < r)
 		quicksort(i, arr, r);
-	}
-	 
-void printt(int y,data arr[],int u) {
+}
+
+void printt(int y, data arr[], int u) {
 	if (u == 1) {
 		for (int i = y; i >= 0; --i) {
 			wprintf_s(arr[i].name);
@@ -60,14 +61,14 @@ void printt(int y,data arr[],int u) {
 			printf(" %i bit\n", arr[i].bytes);
 		}
 	}
-	}
+}
 
 
 int main() {
 	char num; data files[1000];int war;int sort = 0;int y = 0;int h = 0;
-	do{
-	printf("1-select sorting\n");printf("2-specify the path to the directory\n");
-	printf("select an action\n");
+	do {
+		printf("1-kselect sorting\n");printf("2-specify the path to the directory\n");
+		printf("select an action\n");
 		scanf_s("%c", &num);
 		switch (num) {
 		case'1':
@@ -104,26 +105,25 @@ int main() {
 					y++;
 				}
 			} while ((FindNextFile(hFind, &ffd) != 0) && (y < sizeof(files)));
-
+			long double time_spent = 0.0;
 			printf("select a sorting option\n");
 			printf("1- descending . 2-ascending\n");
 			scanf_s("%i", &war);
 			if (sort == 1) {
 				clock_t b = clock();
 				bubblesort(files, y);
+				if (war == 1) { printt(y - 1, files, 1); }
+				else { printt(y - 1, files, 2); }
 				clock_t end = clock();
-				printf("time: %f s.\n", (double)(end - b) / CLOCKS_PER_SEC);
-				if (war == 1) { printt(y, files, 1); }
-				else { printt(y, files, 2); }
-
+				printf("The time was: %f s.\n",(float) (end-b) / CLK_TCK);
 			}
 			else if (sort == 2) {
 				clock_t b = clock();
-				quicksort(0, files, y + 1);
-				clock_t end = clock();
-				printf("time: %f s.\n", (double)(end - b) / CLOCKS_PER_SEC);
+				quicksort(0, files, y);
 				if (war == 1) { printt(y, files, 1); }
 				else { printt(y, files, 2); }
+				clock_t end = clock();
+				printf("The time was: %f s.\n", (float)(end - b) / CLK_TCK);
 			}
 			h++;
 			break;
