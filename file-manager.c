@@ -79,7 +79,12 @@ int main() {
     if (path[strlen(path)-1]!='/')
         strcat(path,"/");
 
-    DIR *folder = opendir(path);
+    DIR *folder;
+
+    start:
+
+    folder = opendir(path);
+
     if(folder == NULL)
     {
         perror("Unable to read entity");
@@ -108,7 +113,7 @@ int main() {
     }
 
     int mode;
-    printf("Choose sorting method: 1)Bubble Sort; 2)Merge Sort; \n0) Exit \n >>>");
+    printf("Choose sorting method: 1)Bubble Sort; 2)Merge Sort; \n0) Exit \n>>>");
     scanf("%d", &mode);
 
     clock_t start, end;
@@ -140,5 +145,15 @@ int main() {
     printf("Completed in %f seconds\n", cpu_time_used);
 
     closedir(folder);
+
+    printf("\nDo you want to try again(y/n)? >>>");
+    getchar();
+    switch(getchar()){
+        case 'y':
+            goto start;
+        case 'n':
+            return 0;
+    }
+
     return 0;
 }
